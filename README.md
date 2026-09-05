@@ -181,3 +181,34 @@ O desenvolvimento canônico do OmniTreco vive exclusivamente na branch **`master
 ```bash
 git checkout master
 ```
+
+---
+
+## 🛠️ Matriz de Replicabilidade
+
+Esta distribuição pública sanitizada categoriza seus componentes em 3 níveis de reprodutibilidade:
+
+| Classificação | Componente / Recursos | Instruções para Execução |
+| :--- | :--- | :--- |
+| **`BUILD_REPRODUCIBLE`** | Aplicação Frontend, Worker Cloudflare, Durable Object | `node -c app.js` e `npx wrangler deploy --dry-run` funcionam imediatamente sem dependências binárias privadas. |
+| **`LOCAL_RUN_REPRODUCIBLE`** | Bancada, Motores Locais (Tesseract.js OCR, jsQR Scanner, Transformers.js WASM STT, Audio Engine, Bolso & Trecos) | Sirva staticamente com `npx serve .` ou abra `index.html`. Funciona 100% offline no navegador sem necessidade de backend. |
+| **`PRODUCTION_INTEGRATION_DEPENDENT`** | Sinalização WebRTC P2P (Durable Objects), Sync de Identidade / Aparelhos | Requer `npx wrangler deploy` na Cloudflare e configuração da variável secreta `IDENTITY_BACKEND_URL` apontando para o servidor SQL (`server/src/server.js`). |
+
+---
+
+## 🔑 Configuração de Ambiente para Produção
+
+Para conectar a cópia pública ao seu próprio ambiente de produção:
+
+1. Configure as variáveis de ambiente no servidor Node/Express (`server/.env`):
+   ```ini
+   PORT=5188
+   DATABASE_URL=postgres://seu_usuario:sua_senha@127.0.0.1:5432/omnitreco
+   FRONTEND_ORIGIN=https://seu-dominio.com
+   ```
+2. Defina o segredo no Worker Cloudflare:
+   ```bash
+   printf "https://seu-backend-tunnel.com" | npx wrangler versions secret put IDENTITY_BACKEND_URL
+   npx wrangler deploy
+   ```
+
