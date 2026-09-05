@@ -14,7 +14,7 @@ O **OmniTreco** é um multi-tool web *local-first*, *browser-first* e PWA, proje
 
 > *O OmniTreco transforma os aparelhos ao seu redor em peças de um único aparelho.*
 
-Sem depender de SaaS corporativos ou processamento em nuvem para manipulação de conteúdos do usuário, o OmniTreco executa tudo diretamente na memória do navegador.
+Sem depender de SaaS corporativos para manipulação de conteúdos do usuário, o OmniTreco executa o processamento diretamente na memória do navegador. A aplicação ainda pode usar CDN para baixar bibliotecas, modelos e pacotes de idioma, além de infraestrutura remota para autenticação e sinalização quando necessário.
 
 ---
 
@@ -78,7 +78,7 @@ Menu Quick Pocket acessível para utilitários imediatos:
 - **Modelo**: **Xenova/whisper-tiny** (*OpenAI Whisper Tiny Multilingual architecture*).
 - **Pipeline Local**:
   $$\text{Áudio} \xrightarrow{\text{Web Audio API}} \text{PCM mono 16 kHz Float32Array} \xrightarrow{\text{WASM/ONNX}} \text{Texto final}$$
-- *Download & Cache*: Modelo baixado sob demanda (~39 MB observados) e armazenado persistentemente em Cache Storage do navegador (`transformers-cache`). Opção de remoção local disponível na interface.
+- *Download & Cache*: Modelo baixado sob demanda (~39 MB observados) e armazenado persistentemente em Cache Storage do navegador (`transformers-cache`). A primeira utilização desse recurso requer acesso aos assets do modelo; depois do download, ele pode funcionar sem backend. Opção de remoção local disponível na interface.
 - *Zero Fallback Remoto*: Nenhum áudio ou transcrição é enviado para APIs externas.
 
 ### 🔊 OmniTreco Lê
@@ -153,7 +153,7 @@ A auditoria completa de hashes, versões e licenças está detalhada em [THIRD_P
 
 O estado funcional e arquitetural do OmniTreco está **congelado e homologado**.
 
-- **Baseline SHA Homologado**: `264e2135cdef53556f3d75e3a1e38918fbafa6fb`
+- **Baseline histórico homologado**: `264e2135cdef53556f3d75e3a1e38918fbafa6fb` (referência de 2026-09-02; alterações posteriores não são automaticamente homologadas)
 
 ```ini
 PRODUCT_ARCHITECTURE = FROZEN
@@ -193,7 +193,7 @@ Esta distribuição pública sanitizada não aponta para a infraestrutura de pro
 | Classificação | Componente / Recursos | Instruções para Execução |
 | :--- | :--- | :--- |
 | **`BUILD_REPRODUCIBLE`** | Aplicação Frontend, Worker Cloudflare, Durable Object | `node -c app.js` e `npx wrangler deploy --dry-run` funcionam imediatamente sem dependências binárias privadas. |
-| **`LOCAL_RUN_REPRODUCIBLE`** | Bancada, Motores Locais (Tesseract.js OCR, jsQR Scanner, Transformers.js WASM STT, Audio Engine, Bolso & Trecos) | Sirva staticamente com `npx serve .` ou abra `index.html`. Funciona 100% offline no navegador sem necessidade de backend. |
+| **`LOCAL_RUN_REPRODUCIBLE`** | Bancada, Motores Locais (Tesseract.js OCR, jsQR Scanner, Transformers.js WASM STT, Audio Engine, Bolso & Trecos) | Sirva por HTTP com `npx serve .`. Os recursos locais não exigem backend, mas a primeira utilização de bibliotecas, modelos ou pacotes de idioma pode exigir acesso à CDN. |
 | **`PRODUCTION_INTEGRATION_DEPENDENT`** | Sinalização WebRTC P2P (Durable Objects), Sync de Identidade / Aparelhos | Requer `npx wrangler deploy` na Cloudflare e configuração da variável secreta `IDENTITY_BACKEND_URL` apontando para o servidor SQL (`server/src/server.js`). |
 
 ---
