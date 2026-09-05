@@ -1,0 +1,12 @@
+asset	source_filename	source_url	license	duration	sample_rate	channels	codec	peak	loudness
+tiny-violin	Bach_Partita_3_for_Violin_Prelude_01.wav	https://upload.wikimedia.org/wikipedia/commons/3/39/Bach_Partita_3_for_Violin_Prelude_01.wav	CC0 1.0 Universal / Public Domain	5.00s	44100	1	pcm_s16le	-4.3 dBTP	-18.9 LUFS
+laugh	Bursting_out_laughing.ogg	https://upload.wikimedia.org/wikipedia/commons/5/51/Bursting_out_laughing.ogg	CC0 1.0 Universal / Public Domain	2.49s	44100	1	pcm_s16le	-2.0 dBTP	-19.0 LUFS
+applause	Applause_i.ogg	https://upload.wikimedia.org/wikipedia/commons/5/5b/Applause_i.ogg	CC0 1.0 Universal / Public Domain	3.00s	44100	1	pcm_s16le	-2.4 dBTP	-21.2 LUFS
+cricket	Gryllus_campestris.ogv	https://upload.wikimedia.org/wikipedia/commons/8/83/Gryllus_campestris.ogv	CC0 1.0 Universal / Public Domain	3.00s	44100	1	pcm_s16le	-4.5 dBTP	-17.2 LUFS
+womp	Sad_Trombone.wav	https://upload.wikimedia.org/wikipedia/commons/3/3e/Sad_Trombone.wav	CC BY 4.0 International	1.80s	44100	1	pcm_s16le	-10.0 dBTP	-25.0 LUFS
+dramatic	647712_unfa_braam.flac	https://upload.wikimedia.org/wikipedia/commons/1/1c/647712_unfa_braam.flac	CC0 1.0 Universal / Public Domain	3.00s	44100	1	pcm_s16le	-3.5 dBTP	-18.6 LUFS
+horn	Car_Horn.wav	https://upload.wikimedia.org/wikipedia/commons/8/8c/Car_Horn.wav	CC0 1.0 Universal / Public Domain	1.00s	44100	1	pcm_s16le	-5.5 dBTP	-19.4 LUFS
+boing	Jew_s_harp_example.ogg	https://upload.wikimedia.org/wikipedia/commons/d/d2/Jew%27s_harp_example.ogg	CC0 1.0 Universal / Public Domain	1.20s	44100	1	pcm_s16le	-7.0 dBTP	-16.0 LUFS
+siren	American_police_siren_i.ogg	https://upload.wikimedia.org/wikipedia/commons/a/ae/American_police_siren_i.ogg	CC0 1.0 Universal / Public Domain	1.50s	44100	1	pcm_s16le	-1.0 dBTP	-21.6 LUFS
+winner	Ceremonial_Fanfare_-_Concert_Band_-_United_States_Air_Force_Heritage_of_America_Band.mp3	https://upload.wikimedia.org/wikipedia/commons/6/65/Ceremonial_Fanfare_-_Concert_Band_-_United_States_Air_Force_Heritage_of_America_Band.mp3	CC0 1.0 Universal / Public Domain	2.00s	44100	1	pcm_s16le	-3.6 dBTP	-16.9 LUFS
+beep	Gts_%28bbc%29_pips.ogg	https://upload.wikimedia.org/wikipedia/commons/0/0f/Gts_%28bbc%29_pips.ogg	CC0 1.0 Universal / Public Domain	0.09s	44100	1	pcm_s16le	-1.0 dBTP	-inf LUFS

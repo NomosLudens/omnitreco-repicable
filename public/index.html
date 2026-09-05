@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#08090d">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="OMNITRECO">
+  <meta name="omnitreco-build" content="freeze-v1">
+  <link rel="apple-touch-icon" href="/icon-192.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+  <title>OMNITRECO — Jogue qualquer coisa. Diga o que precisa.</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=freeze-v1">
+</head>
+<body>
+  <div id="app">
+    <!-- Main Top Header -->
+    <header class="app-header">
+      <div class="logo-container">
+        <span class="logo-icon">🛠️</span>
+        <div class="logo-text">
+          <h1>OMNITRECO</h1>
+          <p class="subtitle">Seu navegador ganhou poderes.</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="header-account-btn" class="btn btn-secondary btn-sm" title="Entrar na conta (Sem email)">
+          <span>👤 Entrar</span>
+        </button>
+        <button id="header-menu-btn" class="icon-btn" title="Menu de Ferramentas" aria-label="Menu">
+          <span class="icon">☰</span>
+        </button>
+
+        <!-- Header Dropdown Menu -->
+        <div id="header-dropdown-menu" class="header-dropdown hidden">
+          <button id="improvisar-hero-btn" class="dropdown-item">
+            <span>🪄 IMPROVISAR</span>
+          </button>
+          <button id="teleport-header-btn" class="dropdown-item">
+            <span>🌀 Teleporte P2P</span>
+          </button>
+          <button id="pocket-trigger-btn" class="dropdown-item">
+            <span>🧰 Bolso de Ferramentas</span>
+          </button>
+          <button id="header-violin-btn" class="dropdown-item">
+            <span>🎻 Tiny Violin</span>
+          </button>
+          <button id="haptic-toggle" class="dropdown-item active">
+            <span>📳 Vibração Háptica</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Navigation Bar (4 Categorias Principais) -->
+    <nav class="top-nav-tabs">
+      <button class="nav-tab active" data-target="tool-smart-drop">
+        <span class="tab-icon">🪄</span>
+        <span class="tab-label">Bancada</span>
+      </button>
+      <button class="nav-tab" data-target="tool-outro-aparelho">
+        <span class="tab-icon">🌀</span>
+        <span class="tab-label">Outro aparelho</span>
+      </button>
+      <button class="nav-tab" data-target="tool-mobile-bizarre">
+        <span class="tab-icon">📱</span>
+        <span class="tab-label">Trecos</span>
+      </button>
+      <button class="nav-tab" id="nav-pocket-btn" data-target="tool-bolso">
+        <span class="tab-icon">🧰</span>
+        <span class="tab-label">Bolso</span>
+      </button>
+    </nav>
+
+    <!-- Main Workspace Area -->
+    <main class="app-main">
+      
+      <!-- SURFÁCIE 1: BANCADA (CENTRO DE TRANSFORMAÇÃO) -->
+      <section id="tool-smart-drop" class="tool-screen active">
+        <div class="dropzone-card" id="universal-dropzone">
+          <div class="dropzone-icon">📥</div>
+          <h3>JOGUE QUALQUER COISA AQUI</h3>
+          <p>arquivo · texto · URL · imagem · PDF · pasta</p>
+          <p class="sensory-motto" style="font-size: 0.8rem; color: var(--neon-cyan); font-weight: 700; margin-top: 4px;">👁️ VÊ. 🎙️ OUVE. 🔊 LÊ. Tudo neste aparelho.</p>
+          
+          <div class="dropzone-inputs">
+            <label for="universal-file-input" class="btn btn-primary">📁 Escolher Arquivo</label>
+            <input type="file" id="universal-file-input" class="hidden">
+            <button id="select-folder-btn" class="btn btn-secondary">📁 Abrir Pasta</button>
+            <input type="file" id="folder-input-fallback" webkitdirectory directory class="hidden">
+            <button id="mic-record-btn" class="btn btn-secondary">🎙️ Ouvir Microfone</button>
+          </div>
+          
+          <textarea id="universal-text-input" placeholder="...ou cole seu texto, URL ou código aqui..."></textarea>
+        </div>
+
+        <!-- INTENT ROUTER UI -->
+        <div class="intent-router-card">
+          <div class="intent-header">
+            <h4>Diga o que você quer que aconteça.</h4>
+          </div>
+          <div class="intent-input-group">
+            <input type="text" id="intent-prompt-input" placeholder="Ex: 'deixa com menos de 1 MB', 'tira tudo que identifica essa foto', 'transforma isso numa tabela'...">
+            <button id="run-intent-btn" class="btn btn-primary">FAZER ✨</button>
+          </div>
+          <div class="intent-quick-chips">
+            <button class="chip-prompt" data-intent="menos de 1 mb">⚡ menos de 1 MB</button>
+            <button class="chip-prompt" data-intent="remover exif">🛡️ tirar autor/EXIF</button>
+            <button class="chip-prompt" data-intent="transformar em tabela">📊 transformar em tabela</button>
+            <button class="chip-prompt" data-intent="limpar quebras de pdf">📄 unificar PDF</button>
+          </div>
+        </div>
+
+        <!-- Dynamic Contextual Actions -->
+        <div id="smart-preview-content" class="preview-section"></div>
+        <div class="smart-actions-wrapper">
+          <h4>O que dá para fazer com isso:</h4>
+          <div id="smart-actions-list" class="actions-chips-grid"></div>
+        </div>
+
+        <!-- CONTEXTUAL FUNCTIONAL CONTAINERS IN BANCADA -->
+
+        <!-- 0. Contextual Vision & Hearing Containers -->
+        <div id="contextual-vision-card" class="autofix-card hidden" style="margin-top: 16px;">
+          <h4 id="vision-card-title">👁️ OMNITRECO VÊ — Leitura Local</h4>
+          <div id="vision-status-progress" class="status-msg" style="margin-bottom: 8px;"></div>
+          <div id="vision-result-content"></div>
+        </div>
+
+        <div id="contextual-hearing-card" class="autofix-card hidden" style="margin-top: 16px;">
+          <h4 id="hearing-card-title">🎙️ OMNITRECO OUVE — Transcrição Local</h4>
+          <div id="hearing-status-progress" class="status-msg" style="margin-bottom: 8px;"></div>
+          <div id="hearing-result-content"></div>
+        </div>
+
+        <!-- 1. Contextual Raio-X Report Container -->
+        <div id="raio-x-results" class="raio-x-container hidden" style="margin-top: 16px;"></div>
+
+        <!-- 2. Contextual Folder Inspector Dashboard & Snapshots -->
+        <div class="snapshot-action-buttons mt-12" style="display: flex; gap: 8px;">
+          <button id="create-snapshot-btn" class="btn btn-success" style="display: none;">⏳ Marcar Este Estado (Snapshot)</button>
+          <button id="compare-snapshot-btn" class="btn btn-secondary" style="display: none;">🔄 Comparar com Estado Anterior</button>
+        </div>
+        <div id="folder-results-container" class="folder-results-area hidden" style="margin-top: 16px;"></div>
+
+        <!-- 3. Contextual AutoFix Container -->
+        <div id="contextual-autofix-card" class="autofix-card hidden" style="margin-top: 16px;">
+          <h4>🧹 Diagnóstico & Reparo de Texto</h4>
+          <textarea id="autofix-input-text" placeholder="Texto para diagnóstico..."></textarea>
+          <div class="autofix-actions">
+            <button id="autofix-diagnose-btn" class="btn btn-primary">🔍 Diagnosticar</button>
+            <button id="autofix-run-all-btn" class="btn btn-success">🪄 Consertar Tudo com 1 Clique</button>
+          </div>
+          <div id="autofix-summary-badge" class="autofix-summary-box hidden"></div>
+          <div id="autofix-issues-list" class="issues-list-container"></div>
+        </div>
+
+        <!-- 4. Contextual Recipe Pipeline Builder -->
+        <div id="contextual-recipe-card" class="recipe-builder-card hidden" style="margin-top: 16px;">
+          <h4>⚙️ Combinar Operações em Sequência</h4>
+          <div id="pipeline-steps-list" class="pipeline-steps-container"></div>
+          <div class="pipeline-controls">
+            <select id="add-step-select" class="input-select">
+              <option value="">+ Adicionar Operação ao Pipeline...</option>
+              <option value="remove-invisible">Remover Caracteres Invisíveis</option>
+              <option value="normalize-spaces">Normalizar Espaços</option>
+              <option value="fix-pdf-breaks">Unificar Quebras de Linha PDF</option>
+              <option value="remove-duplicates">Remover Linhas Duplicadas</option>
+              <option value="sort-lines">Ordenar Linhas Alfabeticamente</option>
+              <option value="uppercase">CONVERTER PARA MAIÚSCULAS</option>
+              <option value="lowercase">converter para minúsculas</option>
+              <option value="to-base64">Codificar em Base64</option>
+              <option value="from-base64">Decodificar de Base64</option>
+              <option value="json-beautify">Formatar JSON (Beautify)</option>
+            </select>
+          </div>
+          <div class="recipe-execution-area">
+            <textarea id="recipe-input-text" placeholder="Cole o texto de entrada para rodar a receita..."></textarea>
+            <button id="run-recipe-btn" class="btn btn-success btn-lg">▶️ Executar Receita</button>
+            <textarea id="recipe-output-text" readonly placeholder="Resultado da receita aparecerá aqui..."></textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- SURFÁCIE 2: OUTRO APARELHO (FUSED TELEPORTE P2P + MACGYVER POWERS) -->
+      <section id="tool-outro-aparelho" class="tool-screen">
+        <div class="tool-header">
+          <h2>🌀 Outro aparelho</h2>
+          <p>Envie coisas ou use recursos de outro dispositivo.</p>
+        </div>
+
+        <!-- P2P Teleport Trigger Actions -->
+        <div class="outro-aparelho-teleport-box" style="margin-bottom: 24px; padding: 16px; background: var(--bg-card-glass); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); text-align: center;">
+          <h3 style="font-size: 1.1rem; margin-bottom: 8px; color: var(--neon-cyan);">🌀 Teleporte P2P sem Servidor</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Conecte dois aparelhos para trocar arquivos ou usar sensores remotos.</p>
+          <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+            <button id="outro-send-btn" class="btn btn-primary btn-lg" style="padding: 12px 24px; font-weight: 700;">📤 Enviar Arquivo</button>
+            <button id="outro-receive-btn" class="btn btn-secondary btn-lg" style="padding: 12px 24px; font-weight: 700;">📥 Receber com Código / QR</button>
+          </div>
+        </div>
+
+        <!-- Remote MacGyver Powers -->
+        <div class="macgyver-grid">
+          <!-- Poder 1: Assinatura Digital -->
+          <div class="macgyver-card">
+            <h3>✍️ Superfície para Assinatura</h3>
+            <p>Assine com o dedo no celular e receba o vetor SVG transparente no computador.</p>
+            <div class="signature-stage">
+              <canvas id="signature-canvas"></canvas>
+            </div>
+            <div class="macgyver-card-actions">
+              <button id="clear-signature-btn" class="btn btn-secondary">Limpar</button>
+              <button id="export-signature-btn" class="btn btn-primary">Copiar Assinatura SVG</button>
+            </div>
+          </div>
+
+          <!-- Poder 2: Capturador de Cor do Mundo Real -->
+          <div class="macgyver-card">
+            <h3>🎨 Capturar Cor do Mundo Real</h3>
+            <p>Aponte a câmera para uma parede ou objeto real para estimar a cor visual.</p>
+            <div class="color-picker-stage">
+              <video id="color-video-feed" autoplay playsinline muted></video>
+              <div class="color-swatch-box" id="color-swatch"></div>
+              <div class="color-readouts">
+                <span id="color-hex-display" class="color-val">Nenhuma cor capturada</span>
+                <span id="color-rgb-display" class="color-sub">—</span>
+                <span id="color-hsl-display" class="color-sub">—</span>
+              </div>
+              <p class="disclaimer-text">* Estimativa visual dependente da iluminação e câmera.</p>
+            </div>
+            <div class="macgyver-card-actions">
+              <button id="sample-color-btn" class="btn btn-primary">📷 Ligar Câmera</button>
+              <button id="copy-color-css-btn" class="btn btn-success">Copiar CSS</button>
+            </div>
+          </div>
+
+          <!-- Poder 3: Passador de Slides Presenter -->
+          <div class="macgyver-card">
+            <h3>🖥️ Controle Presenter</h3>
+            <p>Envie e receba eventos de apresentação (Anterior, Próximo, Ponteiro) via P2P.</p>
+            <div class="presenter-stage">
+              <div class="presenter-display">
+                <span class="slide-count" id="presenter-slide-display">slide — / —</span>
+                <span class="presenter-timer" id="presenter-timer-display">⏱️ 00:00</span>
+              </div>
+              <div class="presenter-buttons">
+                <button id="presenter-prev-btn" class="btn btn-secondary btn-lg">◀ Anterior</button>
+                <button id="presenter-laser-btn" class="btn btn-danger btn-lg">● Laser</button>
+                <button id="presenter-next-btn" class="btn btn-primary btn-lg">▶ Próximo</button>
+              </div>
+              <div id="presenter-log" class="presenter-log-box"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TRECOS DO CELULAR -->
+      <section id="tool-mobile-bizarre" class="tool-screen">
+        <div class="tool-header">
+          <h2>📱 Trecos do Celular</h2>
+          <p>Poderes que usam sensores e recursos deste aparelho.</p>
+        </div>
+
+        <!-- TELA 1: LAUNCHER (Grid de 10 Cards) -->
+        <div id="mobile-tools-launcher" class="mobile-tools-launcher">
+          <div class="launcher-grid">
+            <!-- 1. DEDOS -->
+            <div class="launcher-card" data-subtarget="tool-finger-chooser">
+              <div class="card-icon">👆</div>
+              <div class="card-info">
+                <span class="card-title">DEDOS</span>
+                <p class="card-desc">Escolha alguém pelo multitouch</p>
+              </div>
+            </div>
+
+            <!-- 2. NÍVEL -->
+            <div class="launcher-card" data-subtarget="tool-capybara-level">
+              <div class="card-icon">📐</div>
+              <div class="card-info">
+                <span class="card-title">NÍVEL</span>
+                <p class="card-desc">Use o giroscópio</p>
+              </div>
+            </div>
+
+            <!-- 3. ESPELHO -->
+            <div class="launcher-card" data-subtarget="tool-ring-light">
+              <div class="card-icon">🪞</div>
+              <div class="card-info">
+                <span class="card-title">ESPELHO</span>
+                <p class="card-desc">Câmera frontal + luz</p>
+              </div>
+            </div>
+
+            <!-- 4. BARULHO -->
+            <div class="launcher-card" data-subtarget="tool-decibel-meter">
+              <div class="card-icon">🔊</div>
+              <div class="card-info">
+                <span class="card-title">BARULHO</span>
+                <p class="card-desc">Nível relativo do microfone</p>
+              </div>
+            </div>
+
+            <!-- 5. PET -->
+            <div class="launcher-card" data-subtarget="tool-pet-translator">
+              <div class="card-icon">🐕</div>
+              <div class="card-info">
+                <span class="card-title">PET</span>
+                <p class="card-desc">Microfone + brincadeira</p>
+              </div>
+            </div>
+
+            <!-- 6. CHAMADA -->
+            <div class="launcher-card" data-subtarget="tool-fake-call">
+              <div class="card-icon">📞</div>
+              <div class="card-info">
+                <span class="card-title">CHAMADA</span>
+                <p class="card-desc">Simulação de chamada</p>
+              </div>
+            </div>
+
+            <!-- 7. TRONO -->
+            <div class="launcher-card" data-subtarget="tool-paid-toilet">
+              <div class="card-icon">💩</div>
+              <div class="card-info">
+                <span class="card-title">TRONO</span>
+                <p class="card-desc">Calculadora de tempo</p>
+              </div>
+            </div>
+
+            <!-- 8. SONS -->
+            <div class="launcher-card" data-subtarget="tool-soundboard">
+              <div class="card-icon">🎛️</div>
+              <div class="card-info">
+                <span class="card-title">SONS</span>
+                <p class="card-desc">Soundboard</p>
+              </div>
+            </div>
+
+            <!-- 9. STROBE -->
+            <div class="launcher-card" data-subtarget="tool-strobe-morse">
+              <div class="card-icon">🚨</div>
+              <div class="card-info">
+                <span class="card-title">STROBE</span>
+                <p class="card-desc">Luz + Morse</p>
+              </div>
+            </div>
+
+            <!-- 10. MENTIRAS -->
+            <div class="launcher-card" data-subtarget="tool-lie-detector">
+              <div class="card-icon">🎲</div>
+              <div class="card-info">
+                <span class="card-title">MENTIRAS</span>
+                <p class="card-desc">Brincadeira aleatória</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TELA 2: TOOL VIEW (Exibe apenas 1 ferramenta ativa) -->
+        <div id="mobile-tool-view" class="mobile-tool-view hidden">
+          <div class="tool-view-nav">
+            <button id="mobile-tool-back" class="btn btn-secondary back-btn">
+              ← Trecos
+            </button>
+          </div>
+
+          <div id="mobile-tool-view-host" class="mobile-subtool-wrapper">
+            <!-- 1. DEDOS -->
+          <div id="tool-finger-chooser" class="subtool-content active">
+            <div class="tool-badge-bar">
+              <span class="badge-tag tag-real">REAL SENSOR (Multitouch)</span>
+            </div>
+            <div class="finger-stage" id="finger-stage">
+              <div class="finger-prompt">
+                <div class="pulse-hand">🖐️</div>
+                <p>Toquem com os dedos nesta área!</p>
+              </div>
+              <canvas id="finger-canvas"></canvas>
+            </div>
+            <button id="finger-reset-btn" class="btn btn-secondary mt-12">Limpar / Reiniciar</button>
+          </div>
+
+          <!-- 2. NÍVEL DA CAPIVARA -->
+          <div id="tool-capybara-level" class="subtool-content">
+            <div class="tool-badge-bar">
+              <span class="badge-tag tag-real">REAL SENSOR (Giroscópio)</span>
+            </div>
+            <div class="level-stage-wrapper">
+              <div class="level-stage" id="level-stage">
+                <div id="level-bubble" class="level-bubble"></div>
+                <div id="capybara-avatar" class="capybara-avatar">🦫</div>
+              </div>
+            </div>
+            <div class="angle-readout-box">
+              <div class="angle-item">
+                <span class="label">X (Inclin.):</span>
+                <span id="angle-x" class="val">0.0°</span>
+              </div>
+              <div class="angle-item">
+                <span class="label">Y (Frente):</span>
+                <span id="angle-y" class="val">0.0°</span>
+              </div>
+            </div>
+            <div id="level-status-msg" class="tool-status-msg mt-12">Ajuste fino necessário...</div>
+            <button id="request-orientation-btn" class="btn btn-primary mt-12" style="display: none;">Permitir Giroscópio 📐</button>
+          </div>
+
+          <!-- 3. DETECTOR DE MENTIRAS -->
+          <div id="tool-lie-detector" class="subtool-content">
+            <div class="tool-badge-bar">
+              <span class="badge-tag tag-sim">🎲 BRINCADEIRA</span>
+            </div>
+            <p class="disclaimer-text mb-12">É uma brincadeira aleatória. Não mede mentira, estresse ou sinais biométricos.</p>
+            <div class="lie-stage">
+              <button id="lie-thumb-btn" class="thumb-scan-btn">
+                <span class="icon">🖐️</span>
+                <span class="scan-ring"></span>
+              </button>
+              <div id="lie-prompt-text" class="lie-prompt mt-12">Pressione o polegar no sensor acima...</div>
+              <div class="gauge-container mt-12">
+                <div class="gauge-bar-outer">
+                  <div id="lie-gauge-bar" class="gauge-bar-inner" style="width: 0%;"></div>
+                </div>
+                <span id="lie-percent" class="gauge-percent">0%</span>
+              </div>
+            </div>
+            <div id="lie-verdict" class="verdict-box hidden mt-12">
+              <h3 id="verdict-title"></h3>
+              <p id="verdict-desc"></p>
+            </div>
+          </div>
+
+          <!-- 4. ESPELHO RING LIGHT -->
+          <div id="tool-ring-light" class="subtool-content">
+            <div class="tool-badge-bar">
+              <span class="badge-tag tag-real">REAL SENSOR (Câmera Frontal)</span>
+            </div>
+            <div class="mirror-container">
+              <video id="mirror-video" autoplay playsinline></video>
+              <div id="ring-frame" class="ring-frame"></div>
+              <button id="start-mirror-btn" class="btn btn-primary btn-lg center-overlay-btn">ATIVAR CÂMERA 📷</button>
+            </div>
+            <div class="mirror-controls-grid mt-12">
+              <div class="control-group">
+                <label>Intensidade da Luz:</label>
+                <input type="range" id="ring-intensity" min="10" max="100" value="80">
+              </div>
+              <div class="control-group mt-12">
+                <label>Zoom Digital:</label>
+                <input type="range" id="mirror-zoom" min="10" max="30" value="10">
+              </div>
+              <div class="control-group mt-12">
+                <label>Tom da Luz:</label>
+                <div class="color-dots-row">
+                  <button class="color-dot active" data-color="white" style="background: #ffffff;"></button>
+                  <button class="color-dot" data-color="warm" style="background: #ffaa55;"></button>
+                  <button class="color-dot" data-color="pink" style="background: #ff55bb;"></button>
+                  <button class="color-dot" data-color="cyan" style="background: #00e5ff;"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. CALA BOCA (DECIBELÍMETRO) -->
+          <div id="tool-decibel-meter" class="subtool-content">
+            <div class="tool-badge-bar">
+              <span class="badge-tag tag-real">NÍVEL DIGITAL REAL (dBFS)</span>
+            </div>
+            <p class="disclaimer-text mb-12">Mede a amplitude real captada pelo microfone (dBFS). Não equivale a dB SPL sem calibração física.</p>
+            <div class="db-meter-stage">
+              <div id="db-circle" class="db-circle-display">
+                <span id="db-value" class="db-num">--</span>
+                <span class="db-unit">dBFS</span>
+              </div>
+              <div id="db-status-msg" class="tool-status-msg mt-12">Microfone desligado</div>
+            </div>
+            <div class="db-controls mt-12">
+              <div class="control-group">
+                <label>Limite Alerta (<span id="db-limit-display">-20 dBFS</span>):</label>
+                <input type="range" id="db-limit-slider" min="-60" max="-5" value="-20">
+              </div>
+              <button id="start-db-btn" class="btn btn-primary btn-lg mt-12">Ativar Monitor de Barulho 🎤</button>
+            </div>
+          </div>
+
+          <!-- 6. TRADUTOR DE PET -->
+          <div id="tool-pet-translator" class="subtool-content">
+            <div class="tool-badge-bar">
+              <span class="badge-tag tag-sim">🎲 TRADUTOR DE PET DE BRINCADEIRA</span>
+            </div>
+            <p class="disclaimer-text mb-12">Híbrido: Captura áudio do microfone para análise e retorna tradução humorística fictícia.</p>
+            <div class="pet-selector-row">
+              <button class="pet-opt active" data-pet="dog">🐶 Cão</button>
+              <button class="pet-opt" data-pet="cat">🐱 Gato</button>
+              <button class="pet-opt" data-pet="baby">👶 Bebê</button>
+              <button class="pet-opt" data-pet="capybara">🦫 Capivara</button>
+            </div>
+            <div class="pet-record-stage mt-12">
+              <button id="record-pet-btn" class="record-pet-btn">
+                <span class="icon">🎙️</span>
+              </button>
+              <p id="record-status-text" class="tool-status-msg mt-12">Escolha o animal e toque para gravar...</p>
+            </div>
+            <div id="translation-result" class="translation-card hidden mt-12">
+              <h4>💬 Tradução Humana:</h4>
+              <p id="translated-text"></p>
+            </div>
+          </div>
+
+          <!-- 7. CHAMADA FALSA -->
+          <div id="tool-fake-call" class="subtool-content">
+            <div class="tool-badge-bar">
+              <span class="badge-tag tag-sim">🎲 SIMULAÇÃO (Fuga de Reuniões)</span>
+            </div>
+            <div class="fake-call-form mt-12">
+              <div class="control-group">
+                <label>Nome do Chamador:</label>
+                <input type="text" id="fake-caller-name" placeholder="Ex: Chefe da Empresa" class="input-text">
+              </div>
+              <div class="control-group mt-12">
+                <label>Aguardar Tempo:</label>
+                <div class="chips-row">
+                  <button class="chip-btn active" data-delay="5">5s</button>
+                  <button class="chip-btn" data-delay="10">10s</button>
+                  <button class="chip-btn" data-delay="30">30s</button>
+                  <button class="chip-btn" data-delay="60">60s</button>
+                </div>
+              </div>
+              <button id="schedule-call-btn" class="btn btn-primary btn-lg mt-12">🚀 Programar Chamada Falsa</button>
+            </div>
+
+            <!-- Modal de Chamada Recebida -->
+            <div id="incoming-call-modal" class="pocket-modal-overlay hidden" style="z-index: 3000;">
+              <div class="incoming-call-card">
+                <div class="caller-avatar">👤</div>
+                <h3 id="incoming-caller-name">Chefe</h3>
+                <p id="call-status-label">Chamada Recebida...</p>
+                <div class="call-actions-row mt-12">
+                  <button id="decline-call-btn" class="call-action-btn decline">
+                    <span class="label">📵 Recusar</span>
+                  </button>
+                  <button id="accept-call-btn" class="call-action-btn accept">
+                    <span class="label">📞 Atender</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 8. BANHEIRO PAGO (TRONO) -->
+          <div id="tool-paid-toilet" class="subtool-content">
+            <div class="tool-badge-bar">
+              <span class="badge-tag tag-real">📊 CALCULADORA LOCAL</span>
+            </div>
+            <p class="disclaimer-text mb-12">Calcula o rendimento proporcional por segundo com base no seu salário.</p>
+            <div class="toilet-card mt-12">
+              <div class="control-group">
+                <label>Seu Salário Mensal (R$):</label>
+                <input type="number" id="monthly-salary" value="3500" class="input-text">
+              </div>
+              <div class="timer-display-box mt-12">
+                <span class="currency-prefix">R$</span>
+                <span id="earned-amount" class="earned-num">0.00</span>
+                <div id="toilet-timer-text" class="timer-clock">00:00:00</div>
+              </div>
+              <div class="toilet-actions mt-12">
+                <button id="start-toilet-btn" class="btn btn-primary btn-lg">🚽 Iniciar Sessão no Trono</button>
+                <button id="stop-toilet-btn" class="btn btn-danger btn-lg hidden">🏁 Encerrar Sessão</button>
+              </div>
+              <div class="monthly-accumulator-box mt-12">
+                <span>Acumulado no Mês:</span>
+                <strong id="monthly-poop-total">R$ 0,00</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- 9. SOUNDBOARD (BUZINAS E RISADAS) -->
+          <div id="tool-soundboard" class="subtool-content">
+            <div class="tool-badge-bar">
+              <span class="badge-tag tag-real">🔊 AUDIO SYNTH (Web Audio API)</span>
+            </div>
+            <div class="soundboard-grid mt-12">
+              <button class="sound-card" data-sound="womp">
+                <span class="icon">🎺</span>
+                <span class="label">Womp Womp</span>
+              </button>
+              <button class="sound-card" data-sound="dramatic">
+                <span class="icon">😱</span>
+                <span class="label">Dramático</span>
+              </button>
+              <button class="sound-card" data-sound="laugh">
+                <span class="icon">😂</span>
+                <span class="label">Risadas</span>
+              </button>
+              <button class="sound-card" data-sound="applause">
+                <span class="icon">👏</span>
+                <span class="label">Aplausos</span>
+              </button>
+              <button class="sound-card" data-sound="horn">
+                <span class="icon">📢</span>
+                <span class="label">Buzina</span>
+              </button>
+              <button class="sound-card" data-sound="cricket">
+                <span class="icon">🦗</span>
+                <span class="label">Grilo</span>
+              </button>
+              <button class="sound-card" data-sound="boing">
+                <span class="icon">🎾</span>
+                <span class="label">Boing</span>
+              </button>
+              <button class="sound-card" data-sound="siren">
+                <span class="icon">🚨</span>
+                <span class="label">Sirene</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 10. STROBE & CÓDIGO MORSE -->
+          <div id="tool-strobe-morse" class="subtool-content">
+            <div class="tool-badge-bar">
+              <span class="badge-tag tag-real">🚨 STROBE / MORSE</span>
+            </div>
+            <p class="disclaimer-text mb-12">⚠️ Aviso: Luzes piscantes.</p>
+            <div class="strobe-mode-tabs mt-12">
+              <button class="strobe-tab active" data-strobe-mode="flash">⚡ Strobe Flash</button>
+              <button class="strobe-tab" data-strobe-mode="morse">📡 Código Morse</button>
+            </div>
+            <div id="strobe-flash-panel" class="strobe-panel mt-12">
+              <div class="control-group">
+                <label>Velocidade do Strobe (Hz):</label>
+                <input type="range" id="strobe-speed" min="1" max="20" value="10">
+              </div>
+              <button id="toggle-strobe-btn" class="btn btn-danger btn-lg mt-12">🚨 INICIAR STROBE</button>
+            </div>
+            <div id="strobe-morse-panel" class="strobe-panel hidden mt-12">
+              <div class="control-group">
+                <label>Texto para Transmitir:</label>
+                <input type="text" id="morse-text" placeholder="Ex: SOS" class="input-text">
+              </div>
+              <div id="morse-code-display" class="morse-code-box mt-12">...</div>
+              <button id="play-morse-btn" class="btn btn-primary btn-lg mt-12">📡 TRANSMITIR EM MORSE</button>
+            </div>
+
+            <!-- Full Strobe Overlay -->
+            <div id="full-strobe-overlay" class="strobe-overlay hidden">
+              <button id="close-strobe-btn" class="btn btn-secondary btn-lg center-strobe-close">❌ PARAR STROBE</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER: CPAL-1.0 ATTRIBUTION -->
+    <footer class="app-footer" style="text-align: center; padding: 14px 16px; font-size: 0.75rem; color: var(--text-muted); border-top: 1px solid var(--border-glass); margin: 24px 0 12px 0;">
+      OmniTreco • Licenciado sob <a href="https://opensource.org/licenses/CPAL-1.0" target="_blank" rel="noopener" style="color: var(--neon-cyan); text-decoration: none; font-weight: 600;">CPAL-1.0</a> • NomosLudens
+    </footer>
+
+    <!-- MODAL IMPROVISAR -->
+    <div id="improvisar-modal" class="pocket-modal-overlay hidden">
+      <div class="pocket-modal-card">
+        <div class="pocket-header">
+          <h3>🪄 IMPROVISAR</h3>
+          <button id="close-improvisar-btn" class="icon-btn">❌</button>
+        </div>
+        
+        <div class="wizard-step">
+          <h4>1. O que você tem?</h4>
+          <div class="checkbox-group">
+            <label><input type="checkbox" id="imp-has-celular" checked> 📱 Celular / Tablet</label>
+            <label><input type="checkbox" id="imp-has-pc" checked> 💻 Computador</label>
+            <label><input type="checkbox" id="imp-has-pdf"> 📄 Documento / PDF</label>
+          </div>
+        </div>
+
+        <div class="wizard-step">
+          <h4>2. O que você precisa conseguir?</h4>
+          <div class="radio-group">
+            <label><input type="radio" name="imp-goal" value="sign" checked> ✍️ Assinar um documento com o dedo</label>
+            <label><input type="radio" name="imp-goal" value="color"> 🎨 Capturar uma cor do mundo real (HEX/RGB)</label>
+            <label><input type="radio" name="imp-goal" value="scan"> 📷 Fotografar página e enviar ao PC</label>
+            <label><input type="radio" name="imp-goal" value="presenter"> 🖥️ Passar slides da apresentação remotamente</label>
+          </div>
+        </div>
+
+        <button id="run-improvisar-bridge-btn" class="btn btn-primary btn-lg">FAZER ISSO 🚀</button>
+      </div>
+    </div>
+
+    <!-- MODAL 1: 🌀 TELEPORTE WEBRTC P2P -->
+    <div id="teleport-modal" class="pocket-modal-overlay hidden">
+      <div class="pocket-modal-card">
+        <div class="pocket-header">
+          <h3>🌀 TELEPORTE P2P</h3>
+          <button id="close-teleport-btn" class="icon-btn">❌</button>
+        </div>
+        <p class="privacy-note">Processamento local • Transferência P2P • O servidor não toca nos seus arquivos.</p>
+
+        <!-- Teleport Direct File Picker for Mobile -->
+        <div class="teleport-send-file-box" style="margin: 12px 0; padding: 12px; background: rgba(0, 243, 255, 0.08); border: 1px dashed var(--neon-cyan); border-radius: var(--radius-md); text-align: center;">
+          <input type="file" id="teleport-file-input" class="hidden">
+          <label for="teleport-file-input" class="btn btn-primary" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; cursor: pointer; padding: 12px; font-weight: 700;">
+            📤 ENVIAR ARQUIVO DESTE APARELHO
+          </label>
+          <div id="teleport-selected-file-info" style="margin-top: 8px; font-size: 0.85rem; color: var(--neon-cyan); font-weight: 600; display: none;"></div>
+        </div>
+
+        <div id="teleport-trusted-devices-container"></div>
+
+        <div class="teleport-qr-area">
+          <div id="teleport-qr-canvas"></div>
+          <div class="url-copy-box">
+            <div class="code-badge-display" style="text-align: center; margin-bottom: 8px;">
+              <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">CÓDIGO DA SALA:</span>
+              <span id="teleport-room-code-badge" style="font-family: var(--font-display); font-weight: 800; font-size: 1.25rem; color: var(--neon-cyan); letter-spacing: 1px; display: block; margin-top: 2px;"></span>
+            </div>
+            <label>Link da Sala P2P:</label>
+            <div style="display: flex; gap: 8px; margin-top: 4px;">
+              <input type="text" id="teleport-room-url" readonly style="flex-grow: 1;">
+              <button id="teleport-copy-url-btn" class="btn btn-secondary">COPIAR LINK</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="join-room-by-code-box" style="margin-top: 12px; padding: 12px; background: var(--bg-card-solid); border: 1px solid var(--border-glass); border-radius: var(--radius-md);">
+          <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 6px; font-weight: 600;">💻 SEM CÂMERA? DIGITE O CÓDIGO DO APARELHO:</label>
+          <div style="display: flex; gap: 8px;">
+            <input type="text" id="teleport-join-code-input" placeholder="Ex: farol-J8KD-2QMT-7X4P-N6RW" style="flex-grow: 1; padding: 8px 12px; background: var(--bg-dark); border: 1px solid var(--border-glass); border-radius: var(--radius-sm); color: var(--text-main); font-family: var(--font-display); font-size: 0.85rem;">
+            <button id="teleport-join-code-btn" class="btn btn-primary btn-sm">ENTRAR 🚀</button>
+          </div>
+        </div>
+
+        <div class="multidevice-channel-wrapper">
+          <h4>Dispositivos:</h4>
+          <div id="multidevice-channel"></div>
+        </div>
+
+        <div class="progress-bar-outer hidden" id="teleport-progress-container">
+          <div class="progress-bar-inner" id="teleport-progress-bar"></div>
+        </div>
+        <div class="status-msg" id="teleport-transfer-status">Aguardando alguém aparecer...</div>
+        <div id="teleport-received-actions" class="received-actions-wrapper"></div>
+      </div>
+    </div>
+
+    <!-- MODAL 2: 🧰 BOLSO (CTRL + K) -->
+    <div id="pocket-modal" class="pocket-modal-overlay hidden">
+      <div class="pocket-modal-card">
+        <div class="pocket-header">
+          <h3>🧰 Bolso</h3>
+          <button id="close-pocket-btn" class="icon-btn">❌</button>
+        </div>
+        <input type="text" id="pocket-search-input" placeholder="Buscar treco (Violino, UUID, Senha, Regra de Três, Diff, SHA-256)...">
+        <div id="pocket-tools-grid" class="pocket-grid"></div>
+      </div>
+    </div>
+
+    <!-- MODAL 4: 👤 AUTENTICAÇÃO POR PALAVRA -->
+    <div id="auth-modal" class="pocket-modal-overlay hidden">
+      <div class="pocket-modal-card" style="max-width: 380px;">
+        <div class="pocket-header">
+          <h3>👤 IDENTIDADE OMNITRECO</h3>
+          <button id="close-auth-modal-btn" class="icon-btn">❌</button>
+        </div>
+        <p class="privacy-note">Sem email. Sem conta social. A palavra é o seu segredo.</p>
+
+        <form id="auth-form" style="margin-top: 16px;">
+          <div style="margin-bottom: 12px;">
+            <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 4px; font-weight: 600;">SEU NOME / APELIDO:</label>
+            <input type="text" id="auth-name-input" placeholder="Ex: tonyus" required style="width: 100%; padding: 10px; background: var(--bg-dark); border: 1px solid var(--border-glass); border-radius: var(--radius-sm); color: var(--text-main); font-family: var(--font-display);">
+          </div>
+          <div style="margin-bottom: 16px;">
+            <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 4px; font-weight: 600;">SUA PALAVRA SECRETA / FRASE:</label>
+            <input type="password" id="auth-word-input" placeholder="••••••••••••" required style="width: 100%; padding: 10px; background: var(--bg-dark); border: 1px solid var(--border-glass); border-radius: var(--radius-sm); color: var(--text-main); font-family: var(--font-display);">
+          </div>
+          <div id="auth-error-msg" style="color: var(--neon-pink); font-size: 0.85rem; margin-bottom: 12px; min-height: 1.2em;"></div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">ENTRAR / CRIAR CONTA 🚀</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- MODAL 5: 📱 MEUS APARELHOS -->
+    <div id="my-devices-modal" class="pocket-modal-overlay hidden">
+      <div class="pocket-modal-card" style="max-width: 440px;">
+        <div class="pocket-header">
+          <h3>📱 MEUS APARELHOS</h3>
+          <button id="close-my-devices-modal-btn" class="icon-btn">❌</button>
+        </div>
+        <p class="privacy-note">Aparelhos conectados à sua conta para emparelhamento direto sem QR Code.</p>
+        <div id="my-devices-list" style="margin: 16px 0; max-height: 280px; overflow-y: auto;"></div>
+        <button id="auth-logout-btn" class="btn btn-secondary btn-sm" style="width: 100%; color: #ff4466;">🚪 Sair da Conta</button>
+      </div>
+    </div>
+
+    <!-- OVERLAY: 🎻 TINY VIOLIN -->
+    <div id="tiny-violin-overlay" class="tiny-violin-overlay hidden">
+      <div class="violin-anim-box">
+        <span class="violin-svg">🎻</span>
+        <div class="music-notes">🎵 🎶 🎼</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Vendor Libraries & Engines -->
+  <script src="js/lib/transformers.min.js?v=freeze-v1"></script>
+  <script src="js/lib/tesseract.min.js?v=freeze-v1"></script>
+  <script src="js/lib/jsqr.js?v=freeze-v1"></script>
+  <script src="js/lib/qrcode.js?v=freeze-v1"></script>
+  <script src="js/engine/audioEngine.js?v=freeze-v1"></script>
+  <script src="js/engine/identityEngine.js?v=freeze-v1"></script>
+  <script src="js/engine/fileInspector.js?v=freeze-v1"></script>
+  <script src="js/engine/autoFixer.js?v=freeze-v1"></script>
+  <script src="js/engine/recipePipeline.js?v=freeze-v1"></script>
+  <script src="js/engine/intentRouter.js?v=freeze-v1"></script>
+  <script src="js/engine/webrtcTeleport.js?v=freeze-v1"></script>
+  <script src="js/engine/folderInspector.js?v=freeze-v1"></script>
+  <script src="js/engine/macgyverEngine.js?v=freeze-v1"></script>
+  <script src="js/engine/speechEngine.js?v=freeze-v1"></script>
+  <script src="js/engine/hearingEngine.js?v=freeze-v1"></script>
+  <script src="js/engine/visionEngine.js?v=freeze-v1"></script>
+  <script src="js/tools/smartDrop.js?v=freeze-v1"></script>
+  <script src="js/tools/quickPocket.js?v=freeze-v1"></script>
+  <script src="js/tools/fingerChooser.js?v=freeze-v1"></script>
+  <script src="js/tools/capybaraLevel.js?v=freeze-v1"></script>
+  <script src="js/tools/lieDetector.js?v=freeze-v1"></script>
+  <script src="js/tools/ringLight.js?v=freeze-v1"></script>
+  <script src="js/tools/decibelMeter.js?v=freeze-v1"></script>
+  <script src="js/tools/petTranslator.js?v=freeze-v1"></script>
+  <script src="js/tools/fakeCall.js?v=freeze-v1"></script>
+  <script src="js/tools/paidToilet.js?v=freeze-v1"></script>
+  <script src="js/tools/soundboard.js?v=freeze-v1"></script>
+  <script src="js/tools/strobeMorse.js?v=freeze-v1"></script>
+  <script src="app.js?v=freeze-v1"></script>
+</body>
+</html>

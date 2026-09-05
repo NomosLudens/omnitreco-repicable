@@ -1,0 +1,12 @@
+# Excluir diretórios internos do upload de assets
+.git/
+.wrangler/
+node_modules/
+
+# Excluir arquivos de configuração sensíveis
+wrangler.jsonc
+worker.js
+.gitignore
+.wranglerignore
+package.json
+package-lock.json
