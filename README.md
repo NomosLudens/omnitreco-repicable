@@ -1,5 +1,7 @@
 # 🛠️ OmniTreco
 
+> **Atribuição obrigatória:** OmniTreco, por Nomos Ludens — consulte o arquivo [LICENSE](LICENSE).
+
 > Seu navegador ganhou poderes.
 
 > **OmniTreco vê. OmniTreco ouve. OmniTreco lê.**
@@ -186,7 +188,7 @@ git checkout master
 
 ## 🛠️ Matriz de Replicabilidade
 
-Esta distribuição pública sanitizada categoriza seus componentes em 3 níveis de reprodutibilidade:
+Esta distribuição pública sanitizada não aponta para a infraestrutura de produção de Nomos Ludens. Ela categoriza seus componentes em 3 níveis de reprodutibilidade:
 
 | Classificação | Componente / Recursos | Instruções para Execução |
 | :--- | :--- | :--- |
@@ -198,7 +200,7 @@ Esta distribuição pública sanitizada categoriza seus componentes em 3 níveis
 
 ## 🔑 Configuração de Ambiente para Produção
 
-Para conectar a cópia pública ao seu próprio ambiente de produção:
+Para conectar esta cópia ao seu próprio ambiente de produção, use um domínio e um backend sob seu controle. Nenhum valor real deve ser commitado no repositório:
 
 1. Configure as variáveis de ambiente no servidor Node/Express (`server/.env`):
    ```ini
@@ -208,7 +210,6 @@ Para conectar a cópia pública ao seu próprio ambiente de produção:
    ```
 2. Defina o segredo no Worker Cloudflare:
    ```bash
-   printf "https://seu-backend-tunnel.com" | npx wrangler versions secret put IDENTITY_BACKEND_URL
+   printf "https://seu-backend.example.com" | npx wrangler secret put IDENTITY_BACKEND_URL
    npx wrangler deploy
    ```
-

@@ -1,14 +1,11 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "omnitreco",
+  "name": "omnitreco-replicable",
   "main": "worker.js",
   "compatibility_date": "2026-08-30",
   "assets": {
     "directory": "./public"
   },
-  "routes": [
-    { "pattern": "omnitreco.nomosludens.ia.br", "custom_domain": true }
-  ],
   "durable_objects": {
     "bindings": [
       {

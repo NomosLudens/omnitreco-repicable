@@ -69,7 +69,7 @@ export function setupPresenceWS(wss) {
 
     // Validate Origin header
     const origin = req.headers.origin;
-    const allowedOrigin = process.env.FRONTEND_ORIGIN || 'https://omnitreco.nomosludens.ia.br';
+    const allowedOrigin = process.env.FRONTEND_ORIGIN || 'http://localhost:5173';
     const allowLocalTests = process.env.OMNITRECO_ALLOW_LOCAL_TESTS === 'true';
 
     if (origin && origin !== allowedOrigin && !allowLocalTests) {

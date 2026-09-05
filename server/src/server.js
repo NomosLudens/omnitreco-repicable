@@ -26,7 +26,7 @@ import { setupPresenceWS } from './presence.js';
 
 const app = express();
 const PORT = process.env.PORT || 5188;
-const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || 'https://omnitreco.nomosludens.ia.br';
+const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || 'http://localhost:5173';
 
 // CORS restricted strictly to frontend origin with credentials
 app.use(cors({
