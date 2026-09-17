@@ -1,159 +1,204 @@
-# 🛠️ OmniTreco
+<p align="center">
+  <img src="./icon-192.png" width="112" alt="OmniTreco" />
+</p>
 
-> **Atribuição obrigatória:** OmniTreco, por Nomos Ludens — consulte o arquivo [LICENSE](LICENSE).
+<h1 align="center">🛠️ OmniTreco</h1>
 
-> Seu navegador ganhou poderes.
+<p align="center"><strong>Seu navegador ganhou poderes.</strong></p>
+
+<p align="center">
+  Um multi-tool local-first e browser-first que transforma arquivos,<br />
+  sensores e dispositivos ao seu redor em peças de uma mesma ferramenta.
+</p>
+
+<p align="center">
+  <a href="#por-que-omnitreco">Por quê</a> ·
+  <a href="#as-quatro-superfícies">Superfícies</a> ·
+  <a href="#omnitreco-vê-ouve-lê">Capacidades</a> ·
+  <a href="#local-first-na-prática">Local-first</a> ·
+  <a href="#replicabilidade">Replicabilidade</a> ·
+  <a href="./EMPOWER_NOT_REPLACE.md">Princípios</a> ·
+  <a href="./LICENSE">Licença</a>
+</p>
+
+---
 
 > **OmniTreco vê. OmniTreco ouve. OmniTreco lê.**
 
----
+O OmniTreco não tenta transformar cada pequena tarefa em uma ida a um serviço remoto.
 
-## 💡 O que é o OmniTreco?
+Ele parte de outra pergunta:
 
-O **OmniTreco** é um multi-tool web *local-first*, *browser-first* e PWA, projetado para transformar arquivos, sensores e dispositivos ao seu redor em peças de uma mesma ferramenta.
+> **o que o navegador e os aparelhos que você já tem conseguem fazer por você, aqui e agora?**
 
-> *O OmniTreco transforma os aparelhos ao seu redor em peças de um único aparelho.*
+Quando a resposta pode continuar no dispositivo, continua no dispositivo.
 
-Sem depender de SaaS corporativos para manipulação de conteúdos do usuário, o OmniTreco executa o processamento diretamente na memória do navegador. A aplicação ainda pode usar CDN para baixar bibliotecas, modelos e pacotes de idioma, além de infraestrutura remota para autenticação e sinalização quando necessário.
+Quando outro aparelho pode virar uma ferramenta — uma superfície de assinatura, uma câmera para capturar cor, um controle de apresentação — ele vira parte do mesmo instrumento.
 
----
+Esse é o encontro entre a personalidade do OmniTreco e o princípio da Nomos Ludens:
 
-## 🗺️ As Quatro Superfícies Principais
+> **Empower, not replace.**
 
-A interface do OmniTreco é organizada em torno de apenas **quatro entradas mentais principais**:
+## Por que OmniTreco
+
+Boa parte das tarefas digitais pequenas acaba terceirizada para serviços diferentes: subir um arquivo para inspecionar, mandar uma imagem para extrair texto, usar um site para gerar hash, instalar um aplicativo só para usar um sensor, enviar um áudio para uma API de transcrição.
+
+O OmniTreco tenta devolver esse repertório ao usuário.
+
+Ele usa capacidades do navegador, processamento local, APIs do dispositivo e conexão P2P para transformar o ambiente ao redor em uma bancada digital.
+
+> **O OmniTreco transforma os aparelhos ao seu redor em peças de um único aparelho.**
+
+A regra de produto é simples:
+
+> **Se o navegador consegue fazer, o servidor não toca no arquivo.**
+
+Infraestrutura remota existe quando há uma razão operacional concreta — como sinalização WebRTC, autenticação ou entrega inicial de assets de software — e não como destino automático do conteúdo do usuário.
+
+## As quatro superfícies
+
+| Superfície | Pergunta mental | O que oferece |
+|---|---|---|
+| **🪄 Bancada** | “Tenho uma coisa.” | arquivos, mídia, inspeção, OCR, hashes, receitas, pastas |
+| **🌀 Outro aparelho** | “Preciso de outro dispositivo.” | Teleporte P2P e poderes remotos |
+| **📱 Trecos** | “Quero usar os recursos deste aparelho.” | sensores, câmera, microfone, utilidades físicas |
+| **🧰 Bolso** | “Preciso de uma ferramenta rápida.” | geradores, conversores, cálculos e pequenos utilitários |
+
+### 🪄 Bancada
+
+Superfície para receber e processar objetos soltos:
+
+- **Arquivos & mídia** — imagens, PDFs, áudio, vídeos, textos e URLs.
+- **Inspeção** — metadados, hashes SHA-256 e visualização de diffs.
+- **AutoFix & receitas** — correção de formatação e pipelines de manipulação de texto.
+- **Pastas** — análise local, duplicados reais por SHA-256 e snapshots de estrutura.
+- **Capacidades contextuais** — OCR, QR/barcodes, transcrição local e Teleporte P2P.
+
+### 🌀 Outro aparelho
+
+Quando o melhor periférico é um aparelho que já está perto:
+
+- **Teleporte P2P** — transferência direta via WebRTC DataChannel.
+- **Assinatura remota** — assine com o dedo no celular e receba o vetor SVG no computador.
+- **Captura de cor** — use a câmera de outro aparelho para estimar HEX/RGB/HSL.
+- **Presenter** — transforme outro dispositivo em controle de slides com timer e ponteiro.
+
+### 📱 Trecos
+
+Utilidades construídas a partir das capacidades do dispositivo atual:
+
+- 👆 **DEDOS** — escolha aleatória multitouch.
+- 📐 **NÍVEL** — nível de bolha com giroscópio.
+- 🪞 **ESPELHO** — câmera frontal com iluminação.
+- 🔊 **BARULHO** — medidor relativo via microfone.
+- 🐕 **PET** — tradutor festivo de som de pet.
+- 📞 **CHAMADA** — simulação de chamada recebida.
+- 💩 **TRONO** — calculadora de tempo e valor acumulado.
+- 🎛️ **SONS** — soundboard.
+- 🚨 **STROBE** — sinalizador e Morse.
+- 🎲 **MENTIRAS** — detector recreativo de mentiras.
+
+### 🧰 Bolso
+
+Ferramentas pequenas que não deveriam exigir um aplicativo inteiro:
+
+- 🎻 **Tiny Violin**
+- 🔑 UUID v4, senhas fortes e SHA-256
+- 🔤 Base64 e normalização de espaços
+- 📊 regra de três e diff visual de texto
+
+## OmniTreco vê. Ouve. Lê.
+
+### 👁️ Vê
+
+- **OCR local** com Tesseract.js em Web Worker.
+- **QR Codes** com jsQR.
+- **Barcodes 1D** via BarcodeDetector quando disponível.
+- O conteúdo da imagem permanece no dispositivo; assets e idiomas podem ser baixados sob demanda.
+
+### 🎙️ Ouve
+
+- **Transformers.js + ONNX Runtime Web** para inferência local.
+- Arquitetura **Whisper Tiny Multilingual** via Xenova/whisper-tiny.
+- Áudio convertido localmente para PCM mono 16 kHz e processado via WASM/ONNX.
+- Modelo baixado sob demanda e cacheado localmente.
+- **Zero fallback remoto para áudio ou transcrição.**
+
+### 🔊 Lê
+
+- Síntese de voz via `window.speechSynthesis`.
+- Política estrita de uso apenas de vozes em que `voice.localService === true`.
+
+## Teleporte P2P
+
+Arquivos e dados trafegam diretamente entre navegadores via **WebRTC DataChannel**.
+
+A infraestrutura de sinalização — Cloudflare Workers + Durable Objects — troca SDP/ICE candidates, mas não transporta o conteúdo dos arquivos.
+
+O pareamento pode ser feito por QR Code ou código curto de sala.
+
+## Local-first na prática
+
+> **Local-first. Seus dados ficam com você.**
+
+| Operação | Onde acontece |
+|---|---|
+| OCR e visão | RAM do navegador |
+| STT | WASM/ONNX local |
+| TTS | síntese instalada no dispositivo |
+| Teleporte | P2P entre navegadores |
+| Assets de software | podem ser baixados e cacheados |
+| Sinalização / identidade | infraestrutura remota quando necessária |
+
+O princípio não é “nunca usar servidor”.
+
+É **não centralizar sem motivo**.
+
+## Arquitetura
 
 ```
- 🪄 BANCADA         🌀 OUTRO APARELHO         📱 TRECOS         🧰 BOLSO
-"Tenho uma coisa"   "Preciso de outro"    "Recursos deste"   "Ferramenta rápida"
-```
-
-### 🪄 1. Bancada — *"Tenho uma coisa."*
-Superfície contextual para recepção e processamento de objetos soltos:
-- **Arquivos & Mídias**: Imagens, PDFs, áudio, vídeos, textos e URLs.
-- **Análise & Inspeção**: Inspeção de arquivos, cálculo de hashes SHA-256, metadados e visualização de diffs.
-- **AutoFix & Receitas**: Correção automática de formatação, remoção de quebras inválidas e criação de pipelines customizados de manipulação de texto.
-- **Análise de Pastas**: Inspeção local de diretórios, cálculo de duplicados reais por SHA-256 completo e criação de snapshots de estrutura.
-- **Capacidades Sensoriais Contextuais**: OCR de imagens, leitura de QR/Barcodes, transcrição local de áudio e atalho direto para o Teleporte P2P.
-
-### 🌀 2. Outro aparelho — *"Preciso de outro dispositivo."*
-Superfície de integração entre múltiplos aparelhos:
-- **Teleporte P2P**: Transferência direta de arquivos e dados via WebRTC DataChannel.
-- **Poderes Remotos (Modo MacGyver)**:
-  - ✍️ *Superfície para Assinatura*: Assine com o dedo no celular e receba o vetor SVG transparente no computador.
-  - 🎨 *Capturador de Cor do Mundo Real*: Aponte a câmera do dispositivo remoto para estimar a cor visual em HEX/RGB/HSL.
-  - 🖥️ *Controle Presenter*: Passador de slides P2P com temporizador e sinalização de ponteiro laser.
-
-### 📱 3. Trecos — *"Quero usar os recursos deste aparelho."*
-Conjunto de utilidades e sensores nativos do dispositivo atual:
-- 👆 **DEDOS**: Escolha aleatória multitouch.
-- 📐 **NÍVEL**: Nível de bolha usando o giroscópio.
-- 🪞 **ESPELHO**: Câmera frontal com iluminação Ring Light.
-- 🔊 **BARULHO**: Medidor de nível relativo de ruído via microfone.
-- 🐕 **PET**: Tradutor festivo de som de pet.
-- 📞 **CHAMADA**: Simulação de chamada recebida para escape.
-- 💩 **TRONO**: Calculadora de tempo e valor acumulado.
-- 🎛️ **SONS**: Soundboard com efeitos sonoros auditados.
-- 🚨 **STROBE**: Lanterna com sinalizador de código Morse.
-- 🎲 **MENTIRAS**: Detector de mentiras recreativo.
-
-### 🧰 4. Bolso — *"Preciso de uma ferramenta rápida."*
-Menu Quick Pocket acessível para utilitários imediatos:
-- 🎻 **Tiny Violin**: Efeito sonoro imediato.
-- 🔑 **Geradores**: UUID v4, senhas fortes e hash SHA-256.
-- 🔤 **Conversores**: Base64 encode/decode, Normalizador de espaços.
-- 📊 **Calculadoras**: Regra de três simples, diff visual de texto.
-
----
-
-## 👁️🎙️🔊 OmniTreco vê. Ouve. Lê.
-
-### 👁️ OmniTreco Vê
-- **OCR Local**: Reconhecimento óptico de caracteres em imagens via **Tesseract.js** em Web Worker local (português e inglês).
-- **Leitor QR**: Decodificação de QR Codes via **jsQR** diretamente da matriz de pixels da imagem.
-- **Barcodes 1D**: Suporte a formatos de barras nativos (EAN-13, UPC-A, Code-128) via **BarcodeDetector** nativo.
-- *Privacidade*: O conteúdo da imagem nunca sai do dispositivo. Assets do Tesseract/idioma podem ser baixados da CDN sob demanda, mas a imagem do usuário permanece 100% local.
-
-### 🎙️ OmniTreco Ouve
-- **Runtime**: **Transformers.js (v2.17.2)** + **ONNX Runtime Web** (WebAssembly / WASM SIMD).
-- **Modelo**: **Xenova/whisper-tiny** (*OpenAI Whisper Tiny Multilingual architecture*).
-- **Pipeline Local**:
-  $$\text{Áudio} \xrightarrow{\text{Web Audio API}} \text{PCM mono 16 kHz Float32Array} \xrightarrow{\text{WASM/ONNX}} \text{Texto final}$$
-- *Download & Cache*: Modelo baixado sob demanda (~39 MB observados) e armazenado persistentemente em Cache Storage do navegador (`transformers-cache`). A primeira utilização desse recurso requer acesso aos assets do modelo; depois do download, ele pode funcionar sem backend. Opção de remoção local disponível na interface.
-- *Zero Fallback Remoto*: Nenhum áudio ou transcrição é enviado para APIs externas.
-
-### 🔊 OmniTreco Lê
-- **Síntese de Voz**: Motor de leitura em voz alta baseado em `window.speechSynthesis`.
-- *Política Estrita*: Aceita **EXCLUSIVAMENTE** vozes onde `voice.localService === true`. Vozes remotas de nuvem são sumariamente bloqueadas.
-
----
-
-## 🌀 Teleporte P2P
-
-- **Conexão Direta**: Arquivos e dados trafegam diretamente entre navegadores usando WebRTC DataChannel.
-- **Sinalização Separada**: A infraestrutura de sinalização (Cloudflare Workers + Durable Objects) intermedia apenas a troca de SDP/ICE candidates, jamais tocando nos arquivos transferidos.
-- **Pareamento Simples**: Conexão via QR Code ou código curto de sala.
-
-> *Se o navegador consegue fazer, o servidor não toca no arquivo.*  
-> *Processamento local sempre que possível. Infraestrutura remota é usada somente quando necessária para conexão ou entrega de assets de software.*
-
----
-
-## 🛡️ Privacidade / Local-First
-
-> **Local-First. Seus dados ficam com você.**
-
-- **OCR & Visão**: Imagens e documentos são processados inteiramente na RAM do navegador.
-- **Transcrição STT**: Inferência de áudio executada por código WebAssembly local.
-- **Síntese TTS**: Uso exclusivo de síntese de voz instalada localmente no SO/navegador.
-- **Teleporte**: Conteúdo transmitido de ponto a ponto (P2P).
-- **Download de Assets**: Modelos WebAssembly, bibliotecas vendorizadas e pacotes de idioma são baixados via HTTPS e cacheados localmente. Sinalização WebRTC e autenticação utilizam infraestrutura remota apenas quando estritamente necessárias.
-
----
-
-## 🏗️ Arquitetura do Sistema
-
-```
-Browser / PWA (Client-Side Only)
+Browser / PWA
 │
 ├── 🪄 Bancada
-│   ├── Inspector Engine (Metadata & Hashes)
-│   ├── Folder Inspector (Full SHA-256 Duplicates & Snapshots)
-│   ├── AutoFixer & Recipe Pipeline Engine
-│   ├── Vision Engine (Tesseract.js OCR & jsQR)
-│   └── Hearing Engine (Transformers.js WASM + 16kHz PCM)
+│   ├── Inspector Engine
+│   ├── Folder Inspector
+│   ├── AutoFixer & Recipe Pipeline
+│   ├── Vision Engine
+│   └── Hearing Engine
 │
 ├── 🌀 Outro aparelho
-│   ├── WebRTC P2P Teleport Engine
-│   └── MacGyver Remote Powers (Signature SVG, Color Capture, Presenter)
+│   ├── WebRTC P2P Teleport
+│   └── MacGyver Remote Powers
 │
-├── 📱 Trecos (Sensor Suite & Audio Synthesis)
-│
-└── 🧰 Bolso (Quick Pocket Utilities)
+├── 📱 Trecos
+└── 🧰 Bolso
 
-Infraestrutura de Apoio (Quando Necessária):
-├── Cloudflare Worker / Durable Object (WebRTC Signaling Room)
-└── Backend de Identidade (PostgreSQL - apenas sessão/identidade)
+Infraestrutura de apoio, quando necessária:
+├── Cloudflare Worker / Durable Object
+└── Backend de identidade
 ```
 
----
+## Filosofia do produto real
 
-## 📚 Auditoria de Terceiros & Licenças
+No OmniTreco, teste automatizado não é sinônimo de funcionamento físico.
 
-A auditoria completa de hashes, versões e licenças está detalhada em [THIRD_PARTY.md](THIRD_PARTY.md).
+Usamos três níveis de evidência:
 
-- **Tesseract.js** (v5.1.0) — Apache-2.0
-- **jsQR** (v1.4.0) — Apache-2.0
-- **Transformers.js** (v2.17.2) / ONNX Runtime Web — MIT
-- **OpenAI Whisper Architecture** — MIT
-- **Xenova/whisper-tiny ONNX Distribution** — Apache-2.0
+| Nível | Significa |
+|---|---|
+| **STATIC_PASS** | código compila, lint e sintaxe estão corretos |
+| **BROWSER_AUTOMATION_PASS** | fluxo passou em automação controlada |
+| **PHYSICAL_PASS** | uma pessoa validou o comportamento em hardware real |
 
----
+Isso é especialmente importante em recursos que dependem de toque, câmera, microfone, sensores e alto-falante.
 
-## 🔒 Estado do Projeto — FROZEN BASELINE
+## Estado do projeto
 
-O estado funcional e arquitetural do OmniTreco está **congelado e homologado**.
+O estado funcional e arquitetural publicado parte de uma baseline homologada.
 
-- **Baseline histórico homologado**: `264e2135cdef53556f3d75e3a1e38918fbafa6fb` (referência de 2026-09-02; alterações posteriores não são automaticamente homologadas)
+- **Baseline histórico homologado:** `264e2135cdef53556f3d75e3a1e38918fbafa6fb`
+- Referência: 2026-09-02.
+- Alterações posteriores não são automaticamente homologadas.
 
 ```ini
 PRODUCT_ARCHITECTURE = FROZEN
@@ -164,21 +209,48 @@ SENSORY5_FUNCTIONAL_FREEZE = ACCEPTED
 IPHONE_SENSORY_ACCEPTANCE = USER_PHYSICAL_VALIDATION_PENDING
 ```
 
----
+## Auditoria de terceiros
 
-## 🧪 Filosofia do Produto Real
+A auditoria de versões, hashes e licenças está em [THIRD_PARTY.md](./THIRD_PARTY.md).
 
-No OmniTreco, uma suíte de testes passando não é garantia automática de funcionamento físico em hardwares reais. Adotamos a seguinte classificação:
+Principais componentes:
 
-1. **STATIC_PASS**: Código compila, lints limpos e sintaxe válida.
-2. **BROWSER_AUTOMATION_PASS**: Fluxos verificados via automação em ambiente controlado.
-3. **PHYSICAL_PASS**: Teste humano em hardware real (ex: toque físico e alto-falante de iPhone/Android).
+- **Tesseract.js 5.1.0** — Apache-2.0
+- **jsQR 1.4.0** — Apache-2.0
+- **Transformers.js 2.17.2 / ONNX Runtime Web** — MIT
+- **OpenAI Whisper architecture** — MIT
+- **Xenova/whisper-tiny ONNX distribution** — Apache-2.0
 
----
+## Replicabilidade
 
-## 🌿 Branch Canônica
+Esta é uma distribuição pública sanitizada. Ela não aponta para a infraestrutura de produção da Nomos Ludens.
 
-O desenvolvimento canônico do OmniTreco vive exclusivamente na branch **`master`**.
+| Classificação | Componentes | O que é necessário |
+|---|---|---|
+| **BUILD_REPRODUCIBLE** | frontend, Worker Cloudflare, Durable Object | verificações locais e dry-run sem dependências privadas |
+| **LOCAL_RUN_REPRODUCIBLE** | Bancada, OCR, QR, STT, áudio, Bolso e Trecos | servir por HTTP; alguns assets podem precisar ser baixados na primeira execução |
+| **PRODUCTION_INTEGRATION_DEPENDENT** | sinalização P2P e identidade | Cloudflare + backend próprio de identidade |
+
+### Ambiente de produção próprio
+
+Servidor Node/Express:
+
+```ini
+PORT=5188
+DATABASE_URL=postgres://seu_usuario:sua_senha@127.0.0.1:5432/omnitreco
+FRONTEND_ORIGIN=https://seu-dominio.com
+```
+
+Worker Cloudflare:
+
+```bash
+printf "https://seu-backend.example.com" | npx wrangler secret put IDENTITY_BACKEND_URL
+npx wrangler deploy
+```
+
+## Branch canônica
+
+O desenvolvimento canônico do OmniTreco vive na branch `master`.
 
 ```bash
 git checkout master
@@ -186,30 +258,16 @@ git checkout master
 
 ---
 
-## 🛠️ Matriz de Replicabilidade
+### Nomos Ludens
 
-Esta distribuição pública sanitizada não aponta para a infraestrutura de produção de Nomos Ludens. Ela categoriza seus componentes em 3 níveis de reprodutibilidade:
+**Empower, not replace.**
 
-| Classificação | Componente / Recursos | Instruções para Execução |
-| :--- | :--- | :--- |
-| **`BUILD_REPRODUCIBLE`** | Aplicação Frontend, Worker Cloudflare, Durable Object | `node -c app.js` e `npx wrangler deploy --dry-run` funcionam imediatamente sem dependências binárias privadas. |
-| **`LOCAL_RUN_REPRODUCIBLE`** | Bancada, Motores Locais (Tesseract.js OCR, jsQR Scanner, Transformers.js WASM STT, Audio Engine, Bolso & Trecos) | Sirva por HTTP com `npx serve .`. Os recursos locais não exigem backend, mas a primeira utilização de bibliotecas, modelos ou pacotes de idioma pode exigir acesso à CDN. |
-| **`PRODUCTION_INTEGRATION_DEPENDENT`** | Sinalização WebRTC P2P (Durable Objects), Sync de Identidade / Aparelhos | Requer `npx wrangler deploy` na Cloudflare e configuração da variável secreta `IDENTITY_BACKEND_URL` apontando para o servidor SQL (`server/src/server.js`). |
+Technology should increase agency before it increases dependence.
+
+[Leia o princípio →](./EMPOWER_NOT_REPLACE.md)
 
 ---
 
-## 🔑 Configuração de Ambiente para Produção
+**Atribuição obrigatória:** OmniTreco, por Nomos Ludens. Consulte a [licença](./LICENSE).
 
-Para conectar esta cópia ao seu próprio ambiente de produção, use um domínio e um backend sob seu controle. Nenhum valor real deve ser commitado no repositório:
-
-1. Configure as variáveis de ambiente no servidor Node/Express (`server/.env`):
-   ```ini
-   PORT=5188
-   DATABASE_URL=postgres://seu_usuario:sua_senha@127.0.0.1:5432/omnitreco
-   FRONTEND_ORIGIN=https://seu-dominio.com
-   ```
-2. Defina o segredo no Worker Cloudflare:
-   ```bash
-   printf "https://seu-backend.example.com" | npx wrangler secret put IDENTITY_BACKEND_URL
-   npx wrangler deploy
-   ```
+© 2026 Nomos Ludens
